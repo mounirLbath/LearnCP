@@ -1,16 +1,10 @@
 import tensorflow_hub as hub
-import tensorflow_text  # Needed for some USE models
 import numpy as np
 import pandas as pd
 from sklearn.manifold import TSNE
 import matplotlib.pyplot as plt
-from huggingface_hub import login
 from datasets import load_dataset
 
-
-# Example text data (replace this with your Hugging Face dataset)
-access_token = "aaaaa"
-login(access_token)
 ds = load_dataset("open-r1/codeforces", "default",split="train[:1000]") 
 n = 1000 #First n elements taken from database
 
@@ -46,7 +40,7 @@ embeddings = embed(texts_clean).numpy()
 
 # Apply t-SNE
 print("Running t-SNE...")
-tsne = TSNE(n_components=2, random_state=42, perplexity=40)  # tweak perplexity for better results
+tsne = TSNE(n_components=2, random_state=42, perplexity=40) 
 reduced_embeddings = tsne.fit_transform(embeddings)
 
 # Plot
